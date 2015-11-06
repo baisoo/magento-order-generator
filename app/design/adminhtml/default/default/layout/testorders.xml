@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <testorders_adminhtml_testordersbackend_index>
+        <reference name="content">
+            <block type="testorders/adminhtml_testordersbackend" name="testordersbackend" template="testorders/testordersbackend.phtml"/>
+        </reference>
+    </testorders_adminhtml_testordersbackend_index>
+</layout>

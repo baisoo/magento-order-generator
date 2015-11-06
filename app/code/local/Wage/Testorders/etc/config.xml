@@ -1,0 +1,97 @@
+<?xml version="1.0"?>  
+<config>
+    <modules>
+        <Wage_Testorders>
+            <version>0.1.0</version>
+        </Wage_Testorders>
+    </modules>
+    <global>
+        <helpers>
+            <testorders>
+                <class>Wage_Testorders_Helper</class>
+            </testorders>
+        </helpers>
+        <blocks>
+            <testorders>
+                <class>Wage_Testorders_Block</class>
+            </testorders>
+        </blocks>
+        <models>
+            <testorders>
+                <class>Wage_Testorders_Model</class>
+            </testorders>
+        </models>
+    </global>
+    <admin>
+        <routers>
+            <testorders>
+                <use>admin</use>
+                <args>
+                    <module>Wage_Testorders</module>
+                    <frontName>testorders</frontName>
+                </args>
+            </testorders>
+        </routers>
+    </admin>
+    <adminhtml>
+        <menu>
+            <sales>
+                <children>
+                    <wagento module="testorders">
+                        <title>Wagento</title>
+                        <sort_order>100</sort_order>
+                        <children>
+                            <testorders module="testorders">
+                                <title>[EXPRIMENTAL] Create Orders Programmatically</title>
+                                <sort_order>0</sort_order>
+                                <action>testorders/adminhtml_testordersbackend</action>
+                            </testorders>
+                        </children>
+                    </wagento>
+                </children>
+            </sales>
+        </menu>
+        <acl>
+            <resources>
+                <all>
+                    <title>Allow Everything</title>
+                </all>
+                <admin>
+                    <children>
+                        <sales>
+                            <children>
+                                <testorders translate="title" module="testorders">
+                                    <title>Testorders</title>
+                                    <sort_order>1000</sort_order>
+                                    <children>
+                                        <testordersbackend translate="title">
+                                            <title>Backend Page Title</title>
+                                        </testordersbackend>
+                                    </children>
+                                </testorders>
+                            </children>
+                        </sales>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+        <layout>
+            <updates>
+                <testorders>
+                    <file>testorders.xml</file>
+                </testorders>
+            </updates>
+        </layout>
+    </adminhtml>
+    <default>
+        <testorders>
+            <general>
+                <customerid>1</customerid>
+                <payment_method>checkmo</payment_method>
+                <shipping_method>flatrate_flatrate</shipping_method>
+                <order_number>12</order_number>
+                <skulist>30728,4252,1629,6336,4784</skulist>
+            </general>
+        </testorders>
+    </default>
+</config> 

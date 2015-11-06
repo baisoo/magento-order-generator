@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Wage_Testorders>
+      <active>true</active>
+      <codePool>local</codePool>
+      <version>0.1.0</version>
+    </Wage_Testorders>
+  </modules>
+</config>

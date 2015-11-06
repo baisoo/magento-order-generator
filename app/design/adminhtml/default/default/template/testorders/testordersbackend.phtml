@@ -1,0 +1,57 @@
+<?php if (Mage::getStoreConfig('testorders/general/skulist')):?> 
+<p>The following order(s) have been created with invoices:</p>
+<?php else: ?>
+<p>There is no input. please make sure you have configured SKU(s) list in <b>System > Configuration > Wagento > Test order config</b></p>
+<?php endif; ?>
+<hr/>
+<ul id="result-list">
+</ul>
+
+<?php
+$skuList = explode(',', Mage::getStoreConfig('testorders/general/skulist'));
+$order_number = intval(Mage::getStoreConfig('testorders/general/order_number'));
+if ($order_number) {
+    while (sizeof($skuList) < $order_number) {
+        $skuList = array_merge($skuList, $skuList);
+    }
+    $skuList = array_slice($skuList, 0, $order_number);
+}
+?>
+
+<script type="text/javascript">
+var skuList = new Array();
+<?php foreach($skuList as $sku):?>
+    skuList.push('<?php echo $sku?>');
+<?php endforeach;?>
+var request_url = '<?php echo Mage::helper("adminhtml")->getUrl('testorders/adminhtml_testordersbackend/create'); ?>';
+
+function left(sku) {
+    new Ajax.Request(request_url, {
+        method: 'post',
+        parameters: {sku: sku},
+        onSuccess: function(response) {
+            var li = document.createElement('li');
+            li.innerHTML = response.responseText;
+            $("result-list").appendChild(li);
+            sku = skuList.pop();
+            if (sku) right(sku)
+        }
+    });
+}
+
+function right(sku) {
+    new Ajax.Request(request_url, {
+        method: 'post',
+        parameters: {sku: sku},
+        onSuccess: function(response) {
+            var li = document.createElement('li');
+            li.innerHTML = response.responseText;
+            $("result-list").appendChild(li);
+            sku = skuList.pop();
+            if (sku) left(sku)
+        }
+    });
+}
+
+left(skuList.pop());
+</script>
